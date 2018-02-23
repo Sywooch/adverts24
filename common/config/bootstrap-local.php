@@ -1,0 +1,24 @@
+<?php
+
+define('FRONTEND_DOMAIN', 'adverts24.loc');
+define('BACKEND_DOMAIN', 'backend.adverts24.loc');
+
+define('CLIENT_ID_VKONTAKTE', '6154065');
+define('CLIENT_SECRET_VKONTAKTE', 'NohBJWdR86FR4sxoUQb5');
+
+define('CLIENT_ID_FACEBOOK', '1597163377228520');
+define('CLIENT_SECRET_FACEBOOK', 'f6b971c36a61d5dc4275f81db53d94f4');
+
+define('CLIENT_ID_GOOGLE', 'advertsloc');
+define('CLIENT_SECRET_GOOGLE', '525142072061');
+
+define('CLIENT_ID_TWITTER', '');
+define('CLIENT_SECRET_TWITTER', '');
+
+define('CLIENT_ID_YANDEX', '');
+define('CLIENT_SECRET_YANDEX', '');
+
+
+define('VKONTAKTE_GROUP_ID_POSITIVE', '120504421');
+define('VKONTAKTE_GROUP_ID_NEGATIVE', '-120504421');
+define('VKONTAKTE_ACCESS_TOKEN', '6f477f1d6f477f1d6f477f1d5d6f1a984c66f476f477f1d36df7daf67f048a57ea303b4');
