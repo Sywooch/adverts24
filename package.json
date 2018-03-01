@@ -4,7 +4,7 @@
   "description": "adverts24",
   "main": "index.js",
   "dependencies": {
-    "yuicompressor": "^2.4.8"
+    "yuicompressor": "^2.4.7"
   },
   "devDependencies": {},
   "scripts": {
