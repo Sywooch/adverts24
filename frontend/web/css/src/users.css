@@ -1,1 +1,21 @@
-
+/* user header section */
+.user-header {
+    height: 48px;
+}
+.user-header .avatar {
+    float: left;
+    width: 48px;
+    margin-right: 10px;
+}
+.user-header .fullname, .user-header .time {
+    line-height: 24px;
+}
+.user-header .fullname {
+    color: #2a5885;
+}
+.user-header .time {
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 2em;
+    color: #999;
+}

@@ -1,0 +1,36 @@
+.icon {
+    display: inline-block;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+.icon.facebook,
+.icon.google,
+.icon.mailru,
+.icon.odnoklassniki,
+.icon.twitter,
+.icon.vkontakte {
+    background-image: url('/../img/social-icons.png');
+    background-size: auto;
+}
+.icon.facebook {
+    background-position: 0 0;
+}
+.icon.google {
+    background-position: -126px 0;
+}
+.icon.mailru {
+    background-position: -147px 0;
+}
+.icon.odnoklassniki {
+    background-position: -63px 0;
+}
+.icon.twitter {
+    background-position: -21px 0;
+}
+.icon.vkontakte {
+    background-position: -84px 0;
+}

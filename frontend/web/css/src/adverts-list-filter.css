@@ -1,0 +1,58 @@
+@media (max-width: 767px) {
+
+}
+@media (min-width: 768px) {
+    .adverts-list {
+        width: 100%;
+    }
+    .adverts-list-filter {
+        position: fixed;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .adverts-list.with-filter {
+        padding-left: 240px;
+    }
+    .adverts-list-filter {
+        width: 220px;
+    }
+}
+@media (min-width: 992px) {
+    .adverts-list.with-filter {
+        padding-left: 260px;
+    }
+    .adverts-list-filter {
+        width: 240px;
+    }
+}
+
+.adverts-list-filter {
+    background: #f8f8f8;
+    padding: 10px;
+}
+.adverts-list-filter .title {
+    margin-top: 10px;
+}
+.adverts-list-filter div.form-group {
+    padding-bottom: 15px;
+}
+.adverts-list-filter label {
+    display: block;
+    padding: 5px;
+    color: #555;
+}
+.adverts-list-filter label:hover {
+    background: #eee;
+}
+.adverts-list-filter label .collapsed {
+    display: none;
+}
+.adverts-list-filter label .expanded {
+    display: block;
+}
+.adverts-list-filter label.collapsed .collapsed {
+    display: block;
+}
+.adverts-list-filter label.collapsed .expanded {
+    display: none;
+}

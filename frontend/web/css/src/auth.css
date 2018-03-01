@@ -1,0 +1,7 @@
+.auth-clients {
+    text-align: center;
+}
+.auth-clients .auth-icon {
+    display: inline-block;
+    margin-right: 10px;
+}

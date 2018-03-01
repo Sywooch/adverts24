@@ -1,0 +1,50 @@
+.advert-form .files-list {
+    height: 170px;
+    padding: 10px 0;
+    background: #eee;
+}
+.advert-form .file-container {
+    display: inline-block;
+    position: relative;
+    margin-right: 20px;
+}
+.advert-form .file-container img {
+    height: 150px;
+}
+.advert-form .file-container .file-delete, .advert-form .file-container .file-deleting {
+    display: none;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    color: #fff;
+    background-color: rgba(0, 0, 0, .5);
+    font-size: 28px;
+    text-align: center;
+}
+.advert-form .file-container .file-deleting {
+    line-height: 32px;
+}
+.advert-form .file-container:hover .file-delete.visible {
+    display: block;
+}
+.advert-form .files-list .files-empty {
+    text-align: center;
+    line-height: 150px;
+}
+.advert-form .files-progressbar {
+    margin: 0;
+    height: 3px;
+    border: none;
+}
+.advert-form .file-uploaded-success, .advert-form .file-uploaded-fail {
+    display: none;
+}
+.advert-form .file-uploaded-success {
+    color: #5cb85c;
+}
+.advert-form .file-uploaded-fail {
+    color: #d9534f;
+}

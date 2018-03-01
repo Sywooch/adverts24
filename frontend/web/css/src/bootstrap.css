@@ -1,0 +1,37 @@
+/* bootstrap styles */
+.input-group input:first-child {
+    border-right: 0;
+}
+.input-group input:last-child {
+    border-left: 0;
+}
+.input-group .input-group-addon {
+    background: #fff;
+}
+.input-group .input-group-addon {
+    padding: 6px;
+}
+.input-group .input-group-addon:not(:first-child):not(:last-child) {
+    border-left: 0;
+    border-right: 0;
+}
+.form-control {
+    height: 30px;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 0px;
+}
+/*.input-group input:first-child:focus {
+    clip-path: inset(-5px 0px -5px -5px);
+}
+.input-group input:last-child:focus {
+    clip-path: inset(-5px -5px -5px 0px);
+}*/
+.form-group label.control-label {
+    margin-bottom: 0 !important;
+}
+.form-group .control-label/*, .form-group .help-block*/ {
+    height: 34px;
+    line-height: 34px;
+}
