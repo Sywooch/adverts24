@@ -2,6 +2,8 @@
 
 define('FRONTEND_DOMAIN', 'adverts24.loc');
 define('BACKEND_DOMAIN', 'backend.adverts24.loc');
+define('FRONTEND_URL', 'http://' . FRONTEND_DOMAIN);
+define('BACKEND_URL', 'http://' . BACKEND_DOMAIN);
 
 define('CLIENT_ID_VKONTAKTE', '6154065');
 define('CLIENT_SECRET_VKONTAKTE', 'NohBJWdR86FR4sxoUQb5');

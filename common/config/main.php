@@ -1,6 +1,6 @@
 <?php
 
-return [
+$config = [
     'defaultRoute' => 'adverts/advert',
     'language' => 'ru',
     'aliases' => [
@@ -9,26 +9,6 @@ return [
     ],
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
-        'assetManager' => [
-            //'linkAssets' => true,
-            'bundles' => [
-                'yii\web\YiiAsset' => [
-                    'sourcePath' => '@common/modules/core/assets/src',
-                    'js' => ['js/yii.js'],
-                ],
-                'yii\bootstrap\BootstrapAsset' => [
-                    'sourcePath' => null,
-                    'baseUrl' => '@web/libs/bootstrap/dist',
-                ],
-                'yii\widgets\ActiveFormAsset' => [
-                    'sourcePath' => '@common/modules/core/assets/src',
-                    'js' => ['js/yii.activeForm.js'],
-                ],
-                'kartik\datetime\DateTimePickerAsset' => [
-                    'class' => 'common\modules\core\widgets\inputs\dateTimePicker\DateTimePickerAsset'
-                ]
-            ]
-        ],
         'authClientCollection' => [
             'class' => 'yii\authclient\Collection',
             'clients' => [
@@ -120,9 +100,10 @@ return [
 
             ],
         ],
-        'user' => [
-            'class' => 'common\modules\core\web\User',
-            'loginUrl' => '/users/auth/login'
+        'view' => [
+            'class' => 'common\modules\core\web\View',
         ],
     ],
 ];
+
+return $config;
