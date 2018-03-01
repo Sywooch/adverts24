@@ -1,0 +1,23 @@
+{
+  "name": "adverts24",
+  "version": "1.0.0",
+  "description": "adverts24",
+  "main": "index.js",
+  "dependencies": {
+    "yuicompressor": "^2.4.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roman444uk/adverts24.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/roman444uk/adverts24/issues"
+  },
+  "homepage": "https://github.com/roman444uk/adverts24#readme"
+}

@@ -1,0 +1,64 @@
+.adverts-list .items {
+
+}
+.adverts-list {
+
+}
+.advert-container .files-list img {
+    margin-right: 10px;
+    height: 80px;
+}
+.advert-container {
+    position: relative;
+    margin: 0 0 30px 0;
+    padding: 15px 10px;
+}
+.advert-container:hover {
+    background: #f8f8f8;
+}
+.advert-view .advert-container:hover {
+    background: none;
+}
+.advert-container:last-child {
+    border-bottom: none;
+}
+
+.advert-container a.advert-content {
+    display: block;
+    text-indent: 12px;
+    color: #555;
+}
+.advert-container .content:hover {
+    text-decoration: none;
+    background: none;
+}
+.advert-container .info, .advert-container .actions {
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 2em;
+    color: #999;
+}
+.actions-top {
+    position: absolute;
+    top: 17px;
+    right: 10px;
+}
+.advert-container .actions a, .advert-container .actions span {
+    padding: 2px 5px;
+    border-radius: 4px;
+    -moz-border-radius: 4px;;
+    -webkit-border-radius: 4px;
+    color: #888;
+}
+.advert-container .actions .active {
+    color: #00aa00;
+}
+.advert-container .actions a:hover,
+.advert-container .actions .like-button:hover,
+.advert-container .actions .bookmark-button:hover {
+    background: #ddd;
+    cursor: pointer;
+}
+.advert-container .actions a:hover, .advert-container .actions a:focus {
+    text-decoration: none;
+}

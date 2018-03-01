@@ -4,20 +4,37 @@ namespace backend\assets;
 
 use yii\web\AssetBundle;
 
-/**
- * Main backend application asset bundle.
- */
-class AppAsset extends AssetBundle
+class BackEndAsset extends AssetBundle
 {
+    /**
+     * @inheritdoc
+     */
     public $basePath = '@webroot';
+
+    /**
+     * @inheritdoc
+     */
     public $baseUrl = '@web';
+
+    /**
+     * @inheritdoc
+     */
     public $css = [
-        'css/site.css',
+        'css/back.css',
     ];
+
+    /**
+     * @inheritdoc
+     */
     public $js = [
+
     ];
+
+    /**
+     * @inheritdoc
+     */
     public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+        'app\assets\AdminLteAsset',
+        'app\assets\AppAsset',
     ];
 }
