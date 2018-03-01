@@ -17,4 +17,9 @@ class ActiveField extends \yii\bootstrap\ActiveField
 
         return parent::dropDownList($items, $options);
     }
+
+    public function buttonGroupSelectable()
+    {
+
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace common\modules\core\widgets\inputs\multiSelect;
 
+use common\modules\core\web\View;
 use yii\bootstrap\InputWidget;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -77,10 +78,13 @@ class MultiselectPopup extends InputWidget
         if (!$this->multiply && $this->likeInput) {
             $value = $this->clientOptions['selectedValues'] ? $this->clientOptions['selectedValues'][$this->model->{$this->attribute}] : null;
             $html = Html::activeInput('text', $this->model, $this->attribute, [
-                'class' => 'form-control input-sm',
+                'class' => 'form-control input-sm mp-input',
                 'value' => $value,
+                'disabled' => 'disabled',
             ]);
-            $html .= Html::tag('span', '<i class="glyphicon glyphicon-remove"></i>', ['class' => 'input-group-addon']);
+            $html .= Html::tag('span', '<i class="glyphicon glyphicon-list"></i>', [
+                'class' => 'input-group-addon mp-open',
+            ]);
 
             echo Html::tag('div', $html, ['class' => 'input-group']);
         } else {
@@ -101,6 +105,18 @@ class MultiselectPopup extends InputWidget
     protected function registerClientSript()
     {
         MultiselectPopupAsset::register($this->view);
+
+        $js = <<<JS
+var multiselectPopupLanguage = {
+    'selected': 'Выбрано: ',
+    'search': 'Поиск',
+    'select': 'Выбрать',
+    'clear': 'Очистить выделение',
+    'selectAll': 'Выделить все',
+    'from': ' из '
+};
+JS;
+        $this->view->registerJs($js, View::POS_HEAD);
 
         $options = Json::htmlEncode($this->clientOptions);
         $this->view->registerJs("$('#{$this->id}').multiselectPopup({$options})");

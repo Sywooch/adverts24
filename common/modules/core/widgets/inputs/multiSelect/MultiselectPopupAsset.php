@@ -10,14 +10,13 @@ class MultiselectPopupAsset extends AssetBundle
     /**
      * @inheritdoc
      */
-    //public $sourcePath = '@app/modules/core/widgets/inputs/multiSelect/src';
-    public $baseUrl = '@web/src';
+    public $baseUrl = '@web/libs/multiselect-popup';
 
     /**
      * @inheritdoc
      */
     public $js = [
-        'jquery.multiselectPopup.js'
+        'multiselectPopup.js'
     ];
     /**
      * @inheritdoc
@@ -32,10 +31,4 @@ class MultiselectPopupAsset extends AssetBundle
         'yii\jui\JuiAsset',
         'yii\bootstrap\BootstrapAsset',
     ];
-
-    public function init()
-    {
-        $this->js[] = 'i18n/' . \Yii::$app->language . '.js';
-        parent::init();
-    }
 }

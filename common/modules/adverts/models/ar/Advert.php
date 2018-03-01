@@ -27,6 +27,7 @@ use yii\helpers\Url;
  * @property integer $currency_id
  * @property string $content
  * @property string $status
+ * @property string $type
  * @property string $is_foreign
  * @property string $published
  * @property string $expiry_at
@@ -56,6 +57,9 @@ class Advert extends \common\modules\core\db\ActiveRecord
     const STATUS_ACTIVE = 'active';
     const STATUS_BLOCKED = 'blocked';
     const STATUS_NEW = 'new';
+
+    const TYPE_DEMAND = 'demand';
+    const TYPE_OFFER = 'offer';
 
     /**
      * @var boolean whether advert bookmarked by current user
@@ -89,10 +93,13 @@ class Advert extends \common\modules\core\db\ActiveRecord
     public function rules()
     {
         return [
-            [['content', 'user_id', 'category_id', 'geography_id', 'currency_id', 'expiry_at'], 'required'],
+            [['content', 'user_id', 'category_id', 'geography_id', 'expiry_at'], 'required'],
+            ['type', 'required', 'message' => 'Выберите тип'],
+            ['currency_id', 'validateCurrency', 'skipOnEmpty' => false],
             [['user_id'], 'exist', 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id'],'skipOnError' => true],
             [['category_id'], 'exist', 'targetClass' => AdvertCategory::className(), 'targetAttribute' => ['category_id' => 'id'],'skipOnError' => true],
             [['geography_id'], 'exist', 'targetClass' => Geography::className(), 'targetAttribute' => ['geography_id' => 'service_id'],'skipOnError' => true],
+            [['currency_id'], 'exist', 'targetClass' => Currency::className(), 'targetAttribute' => ['currency_id' => 'id'],'skipOnError' => true],
             [['expiry_at'], 'datetime', 'format' => 'php:Y-m-d H:i:s'],
             [['expiry_at'], 'default', 'value' => date('Y-m-d H:i:s', time() + 3600 * 24 * 30)],
             [['currency_id'], 'default', 'value' => function() {
@@ -102,6 +109,7 @@ class Advert extends \common\modules\core\db\ActiveRecord
             //[['min_price', 'max_price'], 'integer', 'integerOnly' => false],
             [['min_price', 'max_price'], 'validatePrice'],
             [['status'], 'validateStatus'],
+            ['type', 'in', 'range' => array_keys(self::getAttributeLabels('type'))],
             [['likesCount', 'dislikesCount', 'looksCount'], 'safe'],
         ];
     }
@@ -140,7 +148,11 @@ class Advert extends \common\modules\core\db\ActiveRecord
                 self::STATUS_NEW => 'Новый',
                 self::STATUS_ACTIVE => 'Активно',
                 self::STATUS_BLOCKED => 'Заблокировано',
-            ]
+            ],
+            'type' => [
+                self::TYPE_DEMAND => 'Спрос',
+                self::TYPE_OFFER => 'Предложение',
+            ],
         ];
     }
 
@@ -213,8 +225,19 @@ class Advert extends \common\modules\core\db\ActiveRecord
         if ($attribute == 'max_price') {
             return;
         }
+
         if ($this->min_price && $this->max_price && $this->min_price > $this->max_price) {
             $this->addError($attribute, AdvertsModule::t('Минимальная цена должна быть меньше максимальной'));
+        }
+    }
+
+    /**
+     * @param string $attribute
+     */
+    public function validateCurrency($attribute)
+    {
+        if (($this->min_price || $this->max_price) && !$this->currency_id) {
+            $this->addError($attribute, AdvertsModule::t('Выберите валюту'));
         }
     }
 

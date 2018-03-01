@@ -66,11 +66,9 @@ class AdvertTemplet extends Advert
         return [
             [['expiry_at'], 'datetime', 'format' => 'php:Y-m-d H:i:s'],
             [['expiry_at'], 'default', 'value' => date('Y-m-d H:i:s', time() + 3600 * 24 * 30)],
-            [['geography_id'], 'default', 'value' => self::DEFAULT_GEOGRAPHY_ID],
-            [
-                ['content', 'category_id', 'currency_id', 'geography_id', 'content', 'status', 'expiry_at', 'min_price', 'max_price'],
-                'safe'
-            ]
+            [['content', 'category_id', 'currency_id', 'geography_id', 'content', 'status', 'expiry_at', 'min_price',
+                'max_price', 'type'
+            ], 'safe'],
         ];
     }
 
