@@ -3,8 +3,9 @@
 namespace backend\assets;
 
 use yii\web\AssetBundle;
+use Yii;
 
-class BackEndAsset extends AssetBundle
+class AppAsset extends AssetBundle
 {
     /**
      * @inheritdoc
@@ -19,9 +20,7 @@ class BackEndAsset extends AssetBundle
     /**
      * @inheritdoc
      */
-    public $css = [
-        'css/back.css',
-    ];
+    public $css = [];
 
     /**
      * @inheritdoc
@@ -35,6 +34,18 @@ class BackEndAsset extends AssetBundle
      */
     public $depends = [
         'app\assets\AdminLteAsset',
-        'app\assets\AppAsset',
     ];
+
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+
+        $this->css = [
+            Yii::getAlias('@frontendWeb/css/bootstrap.css'),
+            Yii::getAlias('@frontendWeb/css/back.css'),
+        ];
+    }
 }

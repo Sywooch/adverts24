@@ -20,23 +20,33 @@ class AppAsset extends AssetBundle
      * @inheritdoc
      */
     public $css = [
+        'libs/bootstrap/dist/css/bootstrap.css',
         'css/bootstrap.css',
-        'css/app.css',
-        'css/front.css',
+        'css/src/page.css',
+        'css/src/bootstrap.css',
+        'css/src/yii.css',
+        'css/src/widgets.css',
+        'css/src/icons.css',
+        'css/src/auth.css',
+        'css/src/adverts-list.css',
+        'css/src/adverts-list-filter.css',
+        'css/src/advert-form.css',
+        'css/src/users.css',
     ];
 
     /**
      * @inheritdoc
      */
     public $js = [
-
+        //'js/src/options.js',
+        //  'js/src/advert-form.js',
     ];
 
     /**
      * @inheritdoc
      */
     public $depends = [
+        'yii\bootstrap\BootstrapPluginAsset',
         'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapPluginAsset'
     ];
 }

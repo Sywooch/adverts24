@@ -5,10 +5,11 @@
  * @var $content string
  */
 
-use app\assets\BackEndAsset;
+use backend\assets\AppAsset;
+
 use yii\helpers\Html;
 
-BackEndAsset::register($this);
+AppAsset::register($this);
 
 ?>
 <?php $this->beginPage() ?>

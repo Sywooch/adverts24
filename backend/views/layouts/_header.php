@@ -23,7 +23,7 @@ use yii\helpers\Url;
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="<?= Url::to(['/switch-end-side', 'side' => EndSideBehavior::FRONT_END_SIDE]); ?>">
+                    <a href="<?= Url::to(FRONTEND_URL); ?>">
                         <i class="fa fa-home"></i>
                     </a>
                 </li>

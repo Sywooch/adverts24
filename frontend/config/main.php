@@ -12,25 +12,8 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
-        'errorHandler' => [
-            'errorAction' => 'site/error',
-        ],
-        'request' => [
-            'csrfParam' => '_csrf',
-        ],
-        'response' => [
-            'class' => 'common\modules\core\web\Response',
-        ],
-        'session' => [
-            // this is the name of the session cookie used for login on the frontend
-            'name' => '_session',
-        ],
-        'user' => [
-            'enableAutoLogin' => true,
-            'identityCookie' => ['name' => '_identity', 'httpOnly' => true],
-        ],
-        'view' => [
-            'class' => 'common\modules\core\web\View',
+        'assetManager' => [
+            'bundles' => !YII_DEBUG ? require __DIR__ . "/assets-prod.php"  : require __DIR__ . "/assets-dev.php",
         ],
     ],
     'modules' => [

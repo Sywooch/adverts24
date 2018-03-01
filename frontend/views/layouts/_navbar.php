@@ -59,7 +59,7 @@ use yii\helpers\Url;
                         ],
                         [
                             'label' => Yii::t('app', 'Администрировать'),
-                            'url' => [BACKEND_DOMAIN],
+                            'url' => Url::to(BACKEND_URL),
                             'visible' => Yii::$app->user->isSuperadmin,
                         ],
                     ]
