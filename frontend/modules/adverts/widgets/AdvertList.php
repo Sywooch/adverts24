@@ -1,6 +1,6 @@
 <?php
 
-namespace common\modules\adverts\widgets;
+namespace frontend\modules\adverts\widgets;
 
 use common\modules\core\db\ActiveRecord;
 use common\modules\core\widgets\WidgetPageSize;
@@ -30,7 +30,7 @@ class AdvertList extends \yii\widgets\ListView
     /**
      * @var string
      */
-    public $itemView = '@common/modules/adverts/views/advert/advert/index';
+    public $itemView = '@frontend/modules/adverts/views/advert/advert/index';
 
     /**
      * @inheritdoc
@@ -60,7 +60,8 @@ class AdvertList extends \yii\widgets\ListView
         if ($this->showOnEmpty || $this->dataProvider->getCount() > 0) {
             $this->layout = $this->render('advert-list/index', [
                 'widget' => $this,
-                'tag' => ArrayHelper::remove($this->options, 'tag', 'div')
+                'tag' => ArrayHelper::remove($this->options, 'tag', 'div'),
+                'renderFilter' => $this->renderFilter,
             ]);
             $content = preg_replace_callback('/{\\w+}/', function ($matches) {
                 $content = $this->renderSection($matches[0]);

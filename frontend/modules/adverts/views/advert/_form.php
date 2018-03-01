@@ -1,9 +1,11 @@
 <?php
 
+use common\modules\adverts\models\ar\Advert;
 use common\modules\adverts\AdvertsModule;
 use common\modules\adverts\models\search\AdvertCategorySearch;
 use common\modules\currency\models\search\CurrencySearch;
 use common\modules\core\widgets\ActiveForm;
+use common\modules\core\widgets\ButtonGroupSelectable;
 use common\modules\core\widgets\inputs\dateTimePicker\DateTimePicker;
 use common\modules\core\widgets\inputs\multiSelect\MultiselectPopup;
 use common\modules\geography\models\search\GeographySearch;
@@ -51,6 +53,8 @@ use yii\web\View;
     ]
 ]); ?>
 
+    <?= Html::activeHiddenInput($model, 'user_id'); ?>
+
     <div class="row">
         <div class="col-sm-7 col-md-8 col-lg-9">
             <?= $form->field($model, 'content', [
@@ -91,9 +95,18 @@ use yii\web\View;
 
                 ]
             ]); ?>
-        </div>
 
-        <div class="col-sm-5 col-md-4 col-lg-3">
+            <?= $form->field($model, 'type', [
+                'options' => [
+                    'class' => 'form-group mb-0'
+                ]
+            ])->widget(ButtonGroupSelectable::className(), [
+                'id' => 'button-group-type',
+                'model' => $model,
+                'attribute' => 'type',
+                'items' => Advert::getAttributeLabels('type'),
+            ]); ?>
+
             <?= $form->field($model, 'category_id')->widget(MultiselectPopup::className(), [
                 'model' => $model,
                 'attribute' => 'category_id',
@@ -134,14 +147,6 @@ use yii\web\View;
                 ],
             ]); ?>
 
-            <?= $form->field($model, 'currency_id', [
-                'options' => [
-                    'class' => 'form-group mb-0'
-                ]
-            ])->dropDownList(
-                ArrayHelper::map(CurrencySearch::getList(), 'id', 'name')
-            ); ?>
-
             <?= $form->field($model, 'min_price', [
                 'options' => [
                     'class' => 'form-group mb-0'
@@ -153,6 +158,17 @@ use yii\web\View;
                     'class' => 'form-group mb-0'
                 ]
             ])->textInput(); ?>
+
+            <?= $form->field($model, 'currency_id', [
+                'options' => [
+                    'class' => 'form-group mb-0'
+                ]
+            ])->widget(ButtonGroupSelectable::className(), [
+                'id' => 'button-group-currency',
+                'model' => $model,
+                'attribute' => 'type',
+                'items' => ArrayHelper::map(CurrencySearch::getList(), 'id', 'short_name'),
+            ]); ?>
         </div>
     </div>
 

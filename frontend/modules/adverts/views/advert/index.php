@@ -1,8 +1,9 @@
 <?php
 
-use common\modules\adverts\widgets\AdvertList;
+use frontend\modules\adverts\widgets\AdvertList;
+use frontend\modules\adverts\widgets\AdvertListLinkSorter;
+
 use yii\widgets\Pjax;
-use common\modules\adverts\widgets\AdvertListLinkSorter;
 
 /**
  * @var \yii\web\View $this
@@ -25,8 +26,9 @@ use common\modules\adverts\widgets\AdvertListLinkSorter;
         'id' => 'adverts-list',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'renderFilter' => $renderFilter,
         'options' => [
-            'class' => 'adverts-list'
+            'class' => !$renderFilter ? 'adverts-list' : 'adverts-list with-filter',
         ],
         'itemOptions' => [
             'class' => 'advert-container',

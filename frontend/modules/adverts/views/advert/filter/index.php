@@ -56,6 +56,24 @@ $expandIcons = '<span class="collapsed pull-right"></span><span class="expanded 
             ])->textInput(); ?>
         </div>
 
+        <!-- type -->
+        <?= Html::tag('label', $model->getAttributeLabel('type') . $expandIcons, [
+            'class' => 'collapsed',
+            'data-toggle' => 'collapse',
+            'href' => '#collapse-type',
+            'aria-expanded' => false,
+            'aria-controls' => 'collapse-phrase',
+        ]); ?>
+
+        <div id="collapse-type" class="collapse<?= $model->type ? ' in' : ''; ?>">
+            <?= $form->field($model, 'type', [
+                'options' => [
+                    'class' => 'form-group mb-0',
+                ],
+                'template' => '<div class="input-group">{input}<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span></div>'
+            ])->textInput(); ?>
+        </div>
+
         <!-- geography_id -->
         <?= Html::tag('label', $model->getAttributeLabel('geography_id') . $expandIcons, [
             'class' => 'collapsed',
@@ -144,41 +162,41 @@ $expandIcons = '<span class="collapsed pull-right"></span><span class="expanded 
             'aria-controls' => 'collapse-date',
         ]); ?>
 
-        <div id="collapse-date" class="collapse<?= $model->min_date || $model->max_date ? ' in' : ''; ?>">
-            <div class="row">
-                <?= $form->field($model, 'min_date', [
-                    'options' => [
-                        'class' => 'form-group col-xs-12 col-sm-12 col-md-12 col-lg-12',
-                    ],
-                    'template' => "{input}",
-                ])->widget(DateTimePicker::className(), [
-                    'options' => [
-                        'class' =>'form-control input-sm',
-                        'placeholder' => Yii::t('app', 'от'),
-                        'value' => $model->getFormattedDatetime('min_date'),
-                    ],
-                    'pluginOptions' => [
-                        'autoclose' => true,
-                    ],
-                ]); ?>
+    <div id="collapse-date" class="collapse<?= $model->min_date || $model->max_date ? ' in' : ''; ?>">
+        <div class="row">
+            <?= $form->field($model, 'min_date', [
+                'options' => [
+                    'class' => 'form-group col-xs-12 col-sm-12 col-md-12 col-lg-12',
+                ],
+                'template' => "{input}",
+            ])->widget(DateTimePicker::className(), [
+                'options' => [
+                    'class' =>'form-control input-sm',
+                    'placeholder' => Yii::t('app', 'от'),
+                    'value' => $model->getFormattedDatetime('min_date'),
+                ],
+                'pluginOptions' => [
+                    'autoclose' => true,
+                ],
+            ]); ?>
 
-                <?= $form->field($model, 'max_date', [
-                    'options' => [
-                        'class' => 'form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-0',
-                    ],
-                    'template' => "{input}",
-                ])->widget(DateTimePicker::className(), [
-                    'options' => [
-                        'class' =>'form-control input-sm',
-                        'placeholder' => Yii::t('app', 'до'),
-                        'value' => $model->getFormattedDatetime('max_date'),
-                    ],
-                    'pluginOptions' => [
-                        'autoclose' => true,
-                    ],
-                ]); ?>
-            </div>
+            <?= $form->field($model, 'max_date', [
+                'options' => [
+                    'class' => 'form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-0',
+                ],
+                'template' => "{input}",
+            ])->widget(DateTimePicker::className(), [
+                'options' => [
+                    'class' =>'form-control input-sm',
+                    'placeholder' => Yii::t('app', 'до'),
+                    'value' => $model->getFormattedDatetime('max_date'),
+                ],
+                'pluginOptions' => [
+                    'autoclose' => true,
+                ],
+            ]); ?>
         </div>
+    </div>
 
         <!-- min_price, max_price -->
         <?= Html::tag('label', Yii::t('app', 'Цена') . $expandIcons, [

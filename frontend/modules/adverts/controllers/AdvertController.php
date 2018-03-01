@@ -6,19 +6,12 @@ use common\modules\adverts\models\ar\Advert;
 use common\modules\adverts\models\ar\AdvertTemplet;
 use common\modules\adverts\models\search\AdvertSearch;
 use common\modules\core\behaviors\WidgetPageSizeBehavior;
-use common\modules\core\models\ar\File;
-use common\modules\core\models\ar\Look;
-use common\modules\core\web\Controller;
+
 use Yii;
-use yii\db\Expression;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Json;
-use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
-use yii\web\UploadedFile;
-use yii\widgets\ActiveForm;
 
 /**
  * Class AdvertController

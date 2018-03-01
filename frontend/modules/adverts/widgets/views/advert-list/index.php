@@ -16,23 +16,25 @@ use yii\helpers\Html;
 ?>
 
 <?= Html::beginTag($tag, $widget->options); ?>
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 text-center-xs text-center-sm text-center-md text-left-lg">
-            {sorter}
+    <?php if ($renderFilter): ?>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 text-center-xs text-center-sm text-center-md text-left-lg">
+                {sorter}
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 text-center-xs text-center-sm text-center-md text-right-lg">
+                {widgetPageSize}
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-left">
+                {uiCurrency}
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                {summary}
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                {pager}
+            </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 text-center-xs text-center-sm text-center-md text-right-lg">
-            {widgetPageSize}
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-left">
-            {uiCurrency}
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-            {summary}
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-            {pager}
-        </div>
-    </div>
+    <?php endif; ?>
     <div class="row">
         {items}
     </div>

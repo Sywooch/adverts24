@@ -1,6 +1,6 @@
 <?php
 
-namespace common\modules\adverts\widgets;
+namespace frontend\modules\adverts\widgets;
 
 use yii\helpers\Html;
 use yii\widgets\LinkSorter;
