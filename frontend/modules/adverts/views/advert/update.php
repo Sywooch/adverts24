@@ -17,4 +17,4 @@ $this->title = AdvertsModule::t('Редактирование объявлени
     </div>
 <?php endif ?>
 
-<?= $this->render('_form', compact('model', 'templet')) ?>
+<?= $this->render('form/index', compact('model', 'templet')) ?>

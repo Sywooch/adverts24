@@ -27,7 +27,7 @@ class m170726_164802_create_adverts_tables extends Migration
             'geography_id'          => 'INT(11) NOT NULL',
             'currency_id'           => 'INT(11) NOT NULL',
             'content'               => 'TEXT NOT NULL',
-            'type'                  => 'ENUM("'.implode('","', $types).'") NOT NULL',
+            'type'                  => 'ENUM("'.implode('","', $types).'", "") DEFAULT NULL',
             'status'                => 'ENUM("'.implode('","', $statuses).'") DEFAULT "'.Advert::STATUS_NEW.'"',
             'is_foreign'            => 'TINYINT(1) DEFAULT 0',
             'published'             => 'TINYINT(1) DEFAULT 0',

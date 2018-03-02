@@ -20,7 +20,9 @@ class AppAsset extends AssetBundle
     /**
      * @inheritdoc
      */
-    public $css = [];
+    public $css = [
+        'frontend/css/src/bootstrap.css'
+    ];
 
     /**
      * @inheritdoc

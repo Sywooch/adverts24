@@ -4,6 +4,8 @@ namespace common\modules\core\widgets\inputs\dateTimePicker;
 
 use common\modules\core\web\View;
 
+use Yii;
+
 class DateTimePicker extends \kartik\datetime\DateTimePicker
 {
     /**
@@ -24,6 +26,16 @@ class DateTimePicker extends \kartik\datetime\DateTimePicker
     /**
      * @inheritdoc
      */
+    public function init()
+    {
+        $this->pluginOptions['language'] = Yii::$app->language;
+
+        parent::init();
+    }
+
+    /**
+     * @inheritdoc
+     */
     protected function setLanguage($prefix, $assetPath = null, $filePath = null, $suffix = '.js')
     {
         // Do not register lang file
@@ -40,7 +52,7 @@ $.fn.datetimepicker.dates['ru'] = {
     daysShort: ["Вск", "Пнд", "Втр", "Срд", "Чтв", "Птн", "Суб", "Вск"],
     daysMin: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"],
     months: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
-    monthsShort: ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"],
+    monthsShort: ["янв", "фев", "мар", "апр", "мая", "июн", "июл", "авг", "сен", "окт", "ноя", "дек"],
     today: "Сегодня",
     suffix: [],
     meridiem: [],

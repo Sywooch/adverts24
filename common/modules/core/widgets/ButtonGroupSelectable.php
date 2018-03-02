@@ -77,13 +77,10 @@ class ButtonGroupSelectable extends InputWidget
 
         $js = <<<JS
 $(document).on('click', "#{$this->id} label", function(event) {
-      var self = $(this),
-          btnGroup = self.parent();
-      
-      btnGroup.find('label').removeClass('active');
-      self.addClass('active')
-      
-      btnGroup.find('input[name=$inputName]').attr('value', self.attr('data-value')).trigger('change');
+    var self = $(this), btnGroup = self.parent();
+    btnGroup.find('label').removeClass('active');
+    self.addClass('active');
+    btnGroup.find('input[name=$inputName]').attr('value', self.attr('data-value')).trigger('change');
 });
 JS;
 

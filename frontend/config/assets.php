@@ -8,7 +8,7 @@ Yii::setAlias('@webroot', __DIR__ . '/../web');
 Yii::setAlias('@web', '/');
 
 
-$definitions = require Yii::getAlias('@common/config/assets.php');
+$definitions = require Yii::getAlias('@frontend/config/assets-dev.php');
 Yii::$container->setDefinitions($definitions);
 
 return [

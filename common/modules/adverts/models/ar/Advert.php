@@ -61,6 +61,9 @@ class Advert extends \common\modules\core\db\ActiveRecord
     const TYPE_DEMAND = 'demand';
     const TYPE_OFFER = 'offer';
 
+    const MAX_FILES = 3;
+    const MAX_FILE_SIZE = 1024 * 1024 * 5;
+
     /**
      * @var boolean whether advert bookmarked by current user
      */

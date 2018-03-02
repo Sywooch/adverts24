@@ -3,17 +3,18 @@
 /**
  * @var \common\modules\adverts\models\ar\Advert $model
  * @var \common\modules\adverts\models\ar\AdvertTemplet $templet
- * @var \yii\web\View $this
+ * @var \common\modules\core\web\View $this
  */
 
-use common\modules\adverts\AdvertsModule;
+use yii\helpers\Html;
 
 ?>
 
 <?php if (Yii::$app->session->getFlash('success')): ?>
     <div class="alert alert-success text-center">
-        <?= AdvertsModule::t('Ваше объявление сохранено и будет опубликовано после одобрения в кратчайшие сроки.'); ?>
+        Ваше объявление сохранено и будет опубликовано после одобрения в кратчайшие сроки!
+        <?= Html::a('Добавить еще', '/adverts/advert/create') ?>..
     </div>
 <?php else: ?>
-    <?= $this->render('_form', compact('model', 'templet')) ?>
+    <?= $this->render('form/index', compact('model', 'templet')) ?>
 <?php endif ?>

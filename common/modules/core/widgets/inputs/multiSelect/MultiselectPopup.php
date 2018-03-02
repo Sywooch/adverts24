@@ -3,11 +3,15 @@
 namespace common\modules\core\widgets\inputs\multiSelect;
 
 use common\modules\core\web\View;
+
 use yii\bootstrap\InputWidget;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Json;
 
+/**
+ * @property View $view
+ */
 class MultiselectPopup extends InputWidget
 {
     const ITEMS_DISPLAY_MODE_INLINE = 'inline';
@@ -106,17 +110,14 @@ class MultiselectPopup extends InputWidget
     {
         MultiselectPopupAsset::register($this->view);
 
-        $js = <<<JS
-var multiselectPopupLanguage = {
-    'selected': 'Выбрано: ',
-    'search': 'Поиск',
-    'select': 'Выбрать',
-    'clear': 'Очистить выделение',
-    'selectAll': 'Выделить все',
-    'from': ' из '
-};
-JS;
-        $this->view->registerJs($js, View::POS_HEAD);
+        $this->view->jsAppData['multiselectPopup']['i18n'] = [
+            'selected' => 'Выбрано: ',
+            'search' => 'Поиск',
+            'select' => 'Выбрать',
+            'clear' => 'Очистить выделение',
+            'selectAll' => 'Выделить все',
+            'from' => ' из '
+        ];
 
         $options = Json::htmlEncode($this->clientOptions);
         $this->view->registerJs("$('#{$this->id}').multiselectPopup({$options})");

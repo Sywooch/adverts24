@@ -1,6 +1,12 @@
 input[data-krajee-datetimepicker] {
     cursor: pointer;
 }
+.datetimepicker table tr td.old, .datetimepicker table tr td.new {
+    color: #aaaaaa;
+}
+.datetimepicker table tr td.disabled, .datetimepicker table tr td.disabled:hover {
+    color:  #eeeeee !important;
+}
 
 
 .modal-loader .loader-image-container {

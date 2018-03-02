@@ -9,6 +9,9 @@ use yii\helpers\Url;
 use dosamigos\fileupload\FileUploadAsset;
 use dosamigos\fileupload\FileUploadPlusAsset;
 
+/**
+ * @see: https://github.com/blueimp/jQuery-File-Upload/wiki/Options#processing-callback-options
+ */
 class FileUpload extends \dosamigos\fileupload\FileUpload
 {
     /**
@@ -62,17 +65,22 @@ class FileUpload extends \dosamigos\fileupload\FileUpload
             FileUploadAsset::register($view);
         }
 
-        $options = Json::encode($this->clientOptions);
-        $id = $this->options['id'];
-
-        $js[] = ";jQuery('#$id').fileupload($options);";
-        if (!empty($this->clientEvents)) {
-            foreach ($this->clientEvents as $event => $handler) {
-                $js[] = "jQuery('#$id').on('$event', $handler);";
-            }
+        if (!empty($this->clientOptions['acceptFileTypes'])) {
+            $acceptFileTypes = ArrayHelper::remove($this->clientOptions, 'acceptFileTypes');
         }
 
-        //$js[0] = preg_replace('/,"acceptFileTypes":"(.+)i","/', ',"acceptFileTypes":$1i,"', $js[0]);
+        $options = Json::encode($this->clientOptions, JSON_PRETTY_PRINT);
+        $id = $this->options['id'];
+
+        $js[] = "$('#$id').fileupload($options);";
+        if (isset($acceptFileTypes)) {
+            $js[] = "$('#$id').fileupload('option', 'acceptFileTypes', {$acceptFileTypes});";
+        }
+        if (!empty($this->clientEvents)) {
+            foreach ($this->clientEvents as $event => $handler) {
+                $js[] = "$('#$id').on('$event', $handler);";
+            }
+        }
 
         $view->registerJs(implode("\n", $js));
     }

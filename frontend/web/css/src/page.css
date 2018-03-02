@@ -50,6 +50,7 @@ p {
 }
 
 @media(max-width:767px) {
+
     .nav li > form > button.logout {
         display:block;
         text-align: left;

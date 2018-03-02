@@ -4,10 +4,9 @@ namespace common\modules\adverts\models\ar;
 
 use common\modules\core\behaviors\ar\DateTimeBehavior;
 use common\modules\core\models\ar\File;
+use common\modules\core\helpers\ArrayHelper;
 use common\modules\geography\models\ar\Geography;
 use common\modules\users\models\ar\User;
-
-use Yii;
 
 /**
  * This is the model class for table "advert_templet".
@@ -18,15 +17,15 @@ use Yii;
  * @property string $content
  * @property string $expiry_at
  * @property string $updated_at
+ * @property array uploadedFiles
  *
  * @property AdvertCategory $category
  * @property Geography $geography
  * @property User $user
+ *
  */
 class AdvertTemplet extends Advert
 {
-    const DEFAULT_GEOGRAPHY_ID = 223;
-
     /**
      * @inheritdoc
      */
@@ -40,9 +39,9 @@ class AdvertTemplet extends Advert
      */
     public function attributes()
     {
-        $attributes = parent::attributes();
-        unset($attributes['created_at']);
-        return $attributes;
+        return ArrayHelper::merge(parent::attributes(), [
+            'created_at', 'uploadedFiles'
+        ]);
     }
 
     /**
@@ -67,9 +66,29 @@ class AdvertTemplet extends Advert
             [['expiry_at'], 'datetime', 'format' => 'php:Y-m-d H:i:s'],
             [['expiry_at'], 'default', 'value' => date('Y-m-d H:i:s', time() + 3600 * 24 * 30)],
             [['content', 'category_id', 'currency_id', 'geography_id', 'content', 'status', 'expiry_at', 'min_price',
-                'max_price', 'type'
+                'max_price', 'type', 'uploadedFile'
             ], 'safe'],
+            ['uploadedFiles', 'file',
+                'extensions' => ['gif', 'jpeg', 'jpg', 'png'],
+                'maxSize' => self::MAX_FILE_SIZE,
+                'maxFiles' => self::MAX_FILES,
+                //'wrongExtension' =>
+                //'tooBig' =>
+                //'tooMany' =>
+            ],
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function beforeValidate()
+    {
+        if (empty($this->type)) {
+            $this->type = null;
+        }
+
+        return parent::beforeValidate();
     }
 
     /**
@@ -124,7 +143,7 @@ class AdvertTemplet extends Advert
      */
     public function clear()
     {
-        foreach ($this->attributes() as $attribute) {
+        foreach ($this->realAttributes() as $attribute) {
             if (in_array($attribute, ['id', 'user_id'])) {
                 continue;
             }

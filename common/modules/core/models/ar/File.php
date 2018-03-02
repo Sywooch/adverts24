@@ -12,6 +12,7 @@ use common\modules\core\validators\FilesLimitValidator;
 /**
  * This is the model class for table "file".
  *
+ * @property integer $id
  * @property integer $owner_id
  * @property string $owner_model_name
  * @property string $file_name
@@ -46,7 +47,8 @@ class File extends \common\modules\core\db\ActiveRecord
             [['deleted_at'], 'safe'],
             [['owner_model_name'], 'string', 'max' => 32],
             [['file_name', 'origin_file_name', 'vk_server', 'vk_photo', 'vk_hash'], 'string', 'max' => 128],
-            ['owner_id', 'validateFilesLimit'],
+            //['owner_id', 'validateFilesLimit'],
+            //['owner_id', 'validateFilesTypes'],
         ];
     }
 
@@ -129,21 +131,24 @@ class File extends \common\modules\core\db\ActiveRecord
      * Validates maximum count of related files.
      * @param string $attribute
      */
-    public function validateFilesLimit($attribute)
+    /*public function validateFilesLimit($attribute)
     {
         $count = self::find()->where([
             'owner_id' => $this->owner_id,
             'owner_model_name' => $this->owner_model_name
         ])->count();
         $modelName = ActiveRecord::getFullClassName($this->owner_model_name);;
-        $maxCount = $modelName::getMaxFilesCount();
+        switch ($modelName) {
+            case Advert::className():
+                $maxCount = $modelName::getMaxFilesCount();
+        }
 
         if ($count >= $maxCount) {
             $this->addError($attribute, Yii::t('app', 'Максимально допустимое количество файлов - {count}', [
                 'count' => $maxCount
             ]));
         }
-    }
+    }*/
 
     /**
      * Uploads file and attaches it to the model.
@@ -154,13 +159,23 @@ class File extends \common\modules\core\db\ActiveRecord
     public static function upload($owner, $attribute = 'files')
     {
         $uploadedFile = UploadedFile::getInstance($owner, $attribute);
+
+        $owner->uploadedFiles = [$uploadedFile];
+        $owner->validate('uploadedFiles');
+
         $file = new self([
             'owner_id' => $owner->id,
             'owner_model_name' => $owner::shortClassName(),
             'file_name' => uniqid(time(), true) . '.' . $uploadedFile->extension,
             'origin_file_name' => $uploadedFile->name
         ]);
-        $file->save() && $uploadedFile->saveAs("{$file->path}/{$file->file_name}");
+
+        if ($owner->hasErrors()) {
+            $file->addError('owner_id', $owner->getFirstError('uploadedFiles'));
+        } else {
+            $file->save() && $uploadedFile->saveAs("{$file->path}/{$file->file_name}");
+        }
+
         return $file;
     }
 }

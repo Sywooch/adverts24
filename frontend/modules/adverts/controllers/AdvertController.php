@@ -158,6 +158,20 @@ class AdvertController extends \common\modules\adverts\controllers\AdvertControl
 
     /**
      * @inheritdoc
+     */
+    public function actionValidate($id = null)
+    {
+        if (!$id) {
+            $model = AdvertTemplet::getByUserId(Yii::$app->user->id);
+            $model->load(Yii::$app->request->post(), '');
+            $model->save();
+        }
+
+        return parent::actionValidate($id);
+    }
+
+    /**
+     * @inheritdoc
      * @return Advert|null
      * @throws NotFoundHttpException
      */

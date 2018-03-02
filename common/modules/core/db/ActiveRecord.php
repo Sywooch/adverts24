@@ -39,8 +39,6 @@ class ActiveRecord extends \yii\db\ActiveRecord
     const LIKE_VALUE = 1;
     const DISLIKE_VALUE = 0;
 
-    protected static $_maxFilesCount = 3;
-
     /**
      * @inheritdoc
      */
@@ -95,7 +93,6 @@ class ActiveRecord extends \yii\db\ActiveRecord
         return parent::attributes();
     }
 
-
     /**
      * @param string $attribute
      * @param string|null $value
@@ -147,15 +144,6 @@ class ActiveRecord extends \yii\db\ActiveRecord
         }
 
         throw new Exception("Класса {$shortClassName} не существует");
-    }
-
-    /**
-     * Returns maximum count of permitted related files.
-     * @return integer
-     */
-    public static function getMaxFilesCount()
-    {
-        return self::$_maxFilesCount;
     }
 
     /**

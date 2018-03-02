@@ -1,5 +1,6 @@
 <?php
 
+use frontend\assets\AdvertFormAsset;
 use common\modules\adverts\models\ar\Advert;
 use common\modules\adverts\AdvertsModule;
 use common\modules\adverts\models\search\AdvertCategorySearch;
@@ -18,8 +19,10 @@ use yii\web\View;
 /**
  * @var \common\modules\adverts\models\ar\Advert $model
  * @var \common\modules\adverts\models\ar\AdvertTemplet $templet
- * @var \yii\web\View $this
+ * @var \common\modules\core\web\View $this
  */
+
+AdvertFormAsset::register($this);
 
 ?>
 
@@ -43,14 +46,6 @@ use yii\web\View;
             'tag' => 'div'
         ]
     ],
-    'clientEvents' => [
-        'ajaxSubmitComplete' => "function(event, jqXHR) {
-            var url = jqXHR.getResponseHeader('X-Reload-Url');
-            if (url) {
-                            
-            }
-        }"
-    ]
 ]); ?>
 
     <?= Html::activeHiddenInput($model, 'user_id'); ?>
@@ -144,6 +139,8 @@ use yii\web\View;
                 ],
                 'pluginOptions' => [
                     'autoclose' => true,
+                    'startDate' => date('Y-m-d'),
+                    'endDate' => date('Y-m-d', time() + 3600 * 24 * 90),
                 ],
             ]); ?>
 
@@ -161,7 +158,8 @@ use yii\web\View;
 
             <?= $form->field($model, 'currency_id', [
                 'options' => [
-                    'class' => 'form-group mb-0'
+                    'class' => 'form-group mb-0',
+                    'style' => !$model->min_price && !$model->max_price ? ' display: none' : ''
                 ]
             ])->widget(ButtonGroupSelectable::className(), [
                 'id' => 'button-group-currency',
@@ -178,41 +176,18 @@ use yii\web\View;
         'emptyItem' => Yii::t('app', 'Empty city option'),
     ])*/ ?>
 
-    <div class="row mt-30">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="files-list" data-action="files-list">
-                <?php
-                $files = !$model->isNewRecord ? $model->files : $templet->files;
-                ?>
-                <?php if ($files): ?>
-                    <?php /** @var $file \common\modules\core\models\ar\File */ ?>
-                    <?php foreach ($files as $file): ?>
-                        <?= $this->render('form/_file-container', [
-                            'model' => $file
-                        ]); ?>
-                    <?php endforeach; ?>
-                <?php endif; ?>
-                <div class="files-empty<?= $files ? ' hide' : '' ?>"><?= Yii::t('app', 'Не загружено ни одного файла...'); ?></div>
-            </div>
-            <?= \yii\jui\ProgressBar::widget([
-                'options' => [
-                    'id' => 'files-progressbar',
-                    'class' => 'files-progressbar',
-                ]
-            ]); ?>
-        </div>
-    </div>
+    <?= $this->render('_fileupload-files', [
+        'model' => $model,
+        'templet' => $templet,
+    ]); ?>
 
     <div class="clear"></div>
 
     <div class="mt-20">
-        <?= $this->render('form/files', [
+        <?= $this->render('_fileupload-button', [
             'model' => $model,
             'templet' => $templet,
         ]); ?>
-
-        <span class="file-uploaded-success">Файл загружен</span>
-        <span class="file-uploaded-fail">Произошла ошибка при загрузке файла</span>
 
         <div class="btn-group pull-right">
             <?php if ($model->isNewRecord): ?>
@@ -245,48 +220,6 @@ use yii\web\View;
 <?php
 if (!Yii::$app->request->isAjax) {
     $saveTempletUrl = Url::to('/adverts/advert/save-templet');
-    $js = <<<JS
-jQuery('#advert-form').on('ajaxComplete', function(data) {
-    $.ajax({
-        url: '{$saveTempletUrl}',
-        method: 'post',
-        data: $(this).serialize(),
-        success: function(data, textStatus, jqXHR ) {
-
-    },
-        error: function() {
-        alert('Ошибка, данные объявления не сохранилиь автоматически!');
-    }
-    });    
-});
-JS;
     $this->registerJs($js, View::POS_READY);
 }
-
-$js = <<<JS
-jQuery('#advert-form').on('click', '[data-action=file-delete]', function() {
-    var self = $(this);
-    var img = self.prev();
-    var container = self.parent();
-    container.css('width', img.css('width')).css('height', img.css('height'));
-    container.find('[data-action=file-deleting]').show();
-    self.removeClass('visible');
-    $.ajax({
-        url: self.attr('data-url'),
-        success: function(data, textStatus, jqXHR) {
-            self.prev().animate({
-                width: 0
-            }, 300, function() {
-                self.parents('.file-container').remove();
-            });
-            $('.files-list .files-empty').show();
-        },
-        error: function() {
-            alert('error. Посмотри firebug!');
-        }
-    });
-    return false;
-})
-JS;
-$this->registerJs($js, View::POS_READY);
 ?>

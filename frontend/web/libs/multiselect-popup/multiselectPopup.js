@@ -1,7 +1,7 @@
 (function ($) {
     $.fn.multiselectPopup = function (method) {
         var settings = {
-            title: multiselectPopupLanguage.select, //
+            title: '', //
             emptyText: 'Указать',
             notEmptyText: 'Изменить',
 
@@ -83,6 +83,9 @@
         var selectedValues;
         var inithialized = false;
         var state = null;
+        var i18n = window.app.multiselectPopup.i18n;
+
+        settings.title = i18n.select;
 
         var methods = {
             init: function (params) {
@@ -153,9 +156,9 @@
                     .replace('{modalId}', settings.modalId)
                     .replace('{navigation}', settings.showNavigation ? settings.navigationTemplate : '')
                     .replace('{title}', settings.title)
-                    .replace('{search}', multiselectPopupLanguage.search)
-                    .replace('{clear}', multiselectPopupLanguage.clear)
-                    .replace('{selectAll}', multiselectPopupLanguage.selectAll)
+                    .replace('{search}', i18n.search)
+                    .replace('{clear}', i18n.clear)
+                    .replace('{selectAll}', i18n.selectAll)
                 ).uniqueId().appendTo('body');
                 modalSelector = '#' + html.attr('id');
 
@@ -279,7 +282,7 @@
 
                 var selCount = $(ul).find('li.mp-selected').length;
                 var allCount = $(ul).find('li').length;
-                $(modalSelector).find(".mp-count").text(multiselectPopupLanguage.selected + selCount + multiselectPopupLanguage.from + allCount);
+                $(modalSelector).find(".mp-count").text(i18n.selected + selCount + i18n.from + allCount);
             },
 
             change: function () {
@@ -347,7 +350,7 @@
                 }
 
                 if (settings.showSelectedCount && settings.multiply) {
-                    parent.find('.mp-selected-count').text(multiselectPopupLanguage.selected + selectedValues.length).show().css('display', 'inline-block');
+                    parent.find('.mp-selected-count').text(i18n.selected + selectedValues.length).show().css('display', 'inline-block');
                 }
             },
 

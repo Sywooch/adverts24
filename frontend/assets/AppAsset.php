@@ -39,7 +39,6 @@ class AppAsset extends AssetBundle
      */
     public $js = [
         //'js/src/options.js',
-        //  'js/src/advert-form.js',
     ];
 
     /**

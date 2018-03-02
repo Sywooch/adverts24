@@ -31,6 +31,7 @@ class FileUploadAction extends Action
             return [
                 'success' => true,
                 'file' => [
+                    'id' => $file->id,
                     'file_name' => $file->file_name,
                     'url' => $file->url,
                     'deleteUrl' => Url::to(['file-delete', 'name' => $file->file_name]),

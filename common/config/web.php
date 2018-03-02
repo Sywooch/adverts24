@@ -2,9 +2,6 @@
 
 return [
     'components' => [
-        'assetManager' => [
-            'bundles' => require __DIR__ . '/assets.php',
-        ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],

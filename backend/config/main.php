@@ -14,12 +14,7 @@ return [
     'bootstrap' => ['log'],
     'components' => [
         'assetManager' => [
-            'bundles' => [
-                /*'yii\bootstrap\BootstrapAsset' => [
-                    'sourcePath' => null,
-                    'baseUrl' => '@frontendWeb/libs/bootstrap/dist',
-                ],*/
-            ]
+            'bundles' => require __DIR__ . "/assets.php",
         ],
     ],
     'modules' => [
