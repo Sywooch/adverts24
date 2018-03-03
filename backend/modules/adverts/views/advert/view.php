@@ -13,13 +13,13 @@ use common\modules\adverts\models\ar\Advert;
 
 <div class="advert-view">
     <div class="advert-container">
-        <?php if ($model->status !== Advert::STATUS_ACTIVE && Yii::$app->user->isSuperadmin && Yii::$app->getIsEndSideBack()): ?>
+        <?php if ($model->status !== Advert::STATUS_ACTIVE): ?>
             <?= $this->render('_publish_button', [
                 'model' => $model
             ]); ?>
         <?php endif; ?>
 
-        <?= $this->render('@app/modules/adverts/views/front/advert/_advert', [
+        <?= $this->render('@frontend/modules/adverts/views/advert/advert/index', [
             'model' => $model,
             'renderPartial' => false,
         ]); ?>

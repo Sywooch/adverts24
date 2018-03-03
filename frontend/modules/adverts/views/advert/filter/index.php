@@ -4,11 +4,12 @@ use common\modules\adverts\models\ar\AdvertTemplet;
 use common\modules\adverts\models\search\AdvertSearch;
 use common\modules\adverts\models\search\AdvertCategorySearch;
 use common\modules\core\widgets\ActiveForm;
+use common\modules\core\widgets\ButtonGroupSelectable;
 use common\modules\core\widgets\inputs\dateTimePicker\DateTimePicker;
 use common\modules\core\widgets\inputs\multiSelect\MultiselectPopup;
 use common\modules\currency\models\search\CurrencySearch;
-use common\modules\geography\models\ar\Geography;
 use common\modules\geography\models\search\GeographySearch;
+use frontend\modules\adverts\models\ar\Advert;
 
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -68,10 +69,14 @@ $expandIcons = '<span class="collapsed pull-right"></span><span class="expanded 
         <div id="collapse-type" class="collapse<?= $model->type ? ' in' : ''; ?>">
             <?= $form->field($model, 'type', [
                 'options' => [
-                    'class' => 'form-group mb-0',
-                ],
-                'template' => '<div class="input-group">{input}<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span></div>'
-            ])->textInput(); ?>
+                    'class' => 'form-group mb-0'
+                ]
+            ])->widget(ButtonGroupSelectable::className(), [
+                'id' => 'button-group-type',
+                'model' => $model,
+                'attribute' => 'type',
+                'items' => Advert::getAttributeLabels('type'),
+            ]); ?>
         </div>
 
         <!-- geography_id -->

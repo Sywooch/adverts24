@@ -126,6 +126,26 @@ class AdvertController extends \common\modules\adverts\controllers\AdvertControl
         return $this->renderIsAjax('create', compact('model', 'templet', 'directPopulating'));
     }
 
+    public function actionView($id)
+    {
+        $model = $this->findModel($id, self::MODE_READ);
+
+        $lookModelAttributes = [
+            'user_id' => Yii::$app->user->id,
+            'owner_id' => $model->id,
+            'owner_model_name' => Advert::shortClassName()
+        ];
+        if (!$lookModel = Look::findOne($lookModelAttributes)) {
+            $lookModel = new Look($lookModelAttributes);
+        }
+        $lookModel->plus();
+        $model->looksCount++;
+
+        return $this->renderIsAjax('view', [
+            'model' => $model
+        ]);
+    }
+
     /**
      * Advert templet saving.
      * @throws NotFoundHttpException

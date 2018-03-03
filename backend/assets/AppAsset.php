@@ -21,7 +21,11 @@ class AppAsset extends AssetBundle
      * @inheritdoc
      */
     public $css = [
-        'frontend/css/src/bootstrap.css'
+        'frontend/css/src/bootstrap.css',
+        'css/src/yii.css',
+        'css/src/widgets.css',
+        'css/src/icons.css',
+        'css/src/users.css',
     ];
 
     /**

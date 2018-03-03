@@ -1,4 +1,7 @@
 <?php
+
+use yii\helpers\ArrayHelper;
+
 /**
  * Configuration file for the "yii asset" console command.
  */
@@ -8,7 +11,10 @@ Yii::setAlias('@webroot', __DIR__ . '/../web');
 Yii::setAlias('@web', '/');
 
 
-$definitions = require Yii::getAlias('@frontend/config/assets-dev.php');
+$definitions = ArrayHelper::merge(
+    require __DIR__ . '/../../common/config/assets.php',
+    require __DIR__ . '/assets-dev.php'
+);
 Yii::$container->setDefinitions($definitions);
 
 return [
