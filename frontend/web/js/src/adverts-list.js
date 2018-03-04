@@ -1,13 +1,18 @@
 jQuery(function ($) {
-    var filter = $('#adverts-list-filter');
+    var filterUi = $('#adverts-list-filter'),
+        advertsListUi = $('#adverts-list');
     // filter affixing
     var initFilterAffix = function () {
-        if (filter.outerHeight() > ($(window).height() - 120)) {
-            filter.removeClass('less-than-screen').addClass('more-than-screen').data('affix', null).affix({offset: {top: function () {
-                return filter.outerHeight() + 120 - $(window).height();
+        var filterUiHeight = filterUi.outerHeight(),
+            calcHeight = $(window).height() - 120;
+        if (filterUiHeight < advertsListUi.outerHeight() && filterUiHeight > calcHeight) {
+            filterUi.removeClass('less-than-screen').addClass('more-than-screen').data('affix', null).affix({offset: {top: function () {
+                return filterUi.outerHeight() + 120 - $(window).height();
             }}});
+        } else if (filterUiHeight < advertsListUi.outerHeight() && filterUiHeight < calcHeight) {
+            filterUi.removeClass('more-than-screen').addClass('less-than-screen').data('affix', null).affix({offset: {top: 0}});
         } else {
-            filter.removeClass('more-than-screen').addClass('less-than-screen').data('affix', null).affix({offset: {top: 0}});
+            filterUi.removeClass('more-than-screen').removeClass('less-than-screen').data('affix', null);
         }
     }
     initFilterAffix();
