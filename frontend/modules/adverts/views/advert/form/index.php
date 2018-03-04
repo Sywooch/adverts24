@@ -62,6 +62,17 @@ AdvertFormAsset::register($this);
         </div>
 
         <div class="col-sm-5 col-md-4 col-lg-3">
+            <?= $form->field($model, 'type', [
+                'options' => [
+                    'class' => 'form-group'
+                ]
+            ])->widget(ButtonGroupSelectable::className(), [
+                'id' => 'button-group-type',
+                'model' => $model,
+                'attribute' => 'type',
+                'items' => Advert::getAttributeLabels('type'),
+            ]); ?>
+
             <?= $form->field($model, 'geography_id')->widget(MultiselectPopup::className(), [
                 'model' => $model,
                 'addonGlyphiconClass' => 'glyphicon-list',
@@ -91,17 +102,6 @@ AdvertFormAsset::register($this);
                 ]
             ]); ?>
 
-            <?= $form->field($model, 'type', [
-                'options' => [
-                    'class' => 'form-group mb-0'
-                ]
-            ])->widget(ButtonGroupSelectable::className(), [
-                'id' => 'button-group-type',
-                'model' => $model,
-                'attribute' => 'type',
-                'items' => Advert::getAttributeLabels('type'),
-            ]); ?>
-
             <?= $form->field($model, 'category_id')->widget(MultiselectPopup::className(), [
                 'model' => $model,
                 'attribute' => 'category_id',
@@ -128,7 +128,7 @@ AdvertFormAsset::register($this);
 
             <?= $form->field($model, 'expiry_at', [
                 'options' => [
-                    'class' => 'form-group mb-0'
+                    'class' => 'form-group'
                 ]
             ])->widget(DateTimePicker::className(), [
                 'layout' => '{input}{picker}',
@@ -146,19 +146,19 @@ AdvertFormAsset::register($this);
 
             <?= $form->field($model, 'min_price', [
                 'options' => [
-                    'class' => 'form-group mb-0'
+                    'class' => 'form-group'
                 ]
             ])->textInput(); ?>
 
             <?= $form->field($model, 'max_price', [
                 'options' => [
-                    'class' => 'form-group mb-0'
+                    'class' => 'form-group'
                 ]
             ])->textInput(); ?>
 
             <?= $form->field($model, 'currency_id', [
                 'options' => [
-                    'class' => 'form-group mb-0',
+                    'class' => 'form-group',
                     'style' => !$model->min_price && !$model->max_price ? ' display: none' : ''
                 ]
             ])->widget(ButtonGroupSelectable::className(), [

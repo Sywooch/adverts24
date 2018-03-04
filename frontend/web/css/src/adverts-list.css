@@ -1,3 +1,51 @@
+/* Pge structure */
+.adverts-list-wrapper {
+    float: right;
+    width: 100%;
+}
+.adverts-list-filter-wrapper {
+    float: left;
+    min-height: 100%;
+}
+.adverts-list-filter.affix.more-than-screen {
+    bottom: 60px;
+}
+.adverts-list-filter.affix.less-than-screen {
+    top: 60px;
+}
+
+@media (max-width: 767px) {
+
+}
+@media (min-width: 768px) {
+
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .adverts-list-wrapper.with-filter {
+        margin-left: -240px;
+        padding-left: 230px;
+    }
+    .adverts-list-filter-wrapper {
+        width: 220px;
+    }
+    .adverts-list-filter {
+        width: 220px;
+    }
+}
+@media (min-width: 992px) {
+    .adverts-list-wrapper.with-filter {
+        margin-left: -260px;
+        padding-left: 250px;
+    }
+    .adverts-list-filter-wrapper {
+        width: 240px;
+    }
+    .adverts-list-filter {
+        width: 240px;
+    }
+}
+
+/* Common styles */
 .adverts-list .items {
 
 }
@@ -61,4 +109,13 @@
 }
 .advert-container .actions a:hover, .advert-container .actions a:focus {
     text-decoration: none;
+}
+
+/* Filter */
+.adverts-list-filter .form-group {
+    margin-bottom: 0;
+}
+.adverts-list-filter .form-group.field-max_date input, .adverts-list-filter .form-group.field-max_date span,
+.adverts-list-filter .form-group.field-max_price input, .adverts-list-filter .form-group.field-max_price span {
+    border-top: none;
 }

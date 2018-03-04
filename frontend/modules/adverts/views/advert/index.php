@@ -14,32 +14,37 @@ use yii\widgets\Pjax;
 
 ?>
 
+<div class="adverts-list-wrapper with-filter">
+
+    <?php Pjax::begin(['id' => 'adverts-list-pjax']); ?>
+
+        <?= AdvertList::widget([
+            'id' => 'adverts-list',
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'renderFilter' => $renderFilter,
+            'options' => [
+                'class' => !$renderFilter ? 'adverts-list' : 'adverts-list with-filter',
+            ],
+            'itemOptions' => [
+                'class' => 'advert-container',
+            ],
+            'sorter' => [
+                'class' => AdvertListLinkSorter::className(),
+                'attributes' => [
+                    'created_at',
+                    'updated_at',
+                    'min_price',
+                ],
+            ]
+        ]); ?>
+
+    <?php Pjax::end() ?>
+
+</div>
+
 <?php if ($renderFilter): ?>
     <?= $this->render('filter/index', [
         'model' => $searchModel,
     ]); ?>
 <?php endif; ?>
-
-<?php Pjax::begin(['id' => 'adverts-list-pjax']); ?>
-
-    <?= AdvertList::widget([
-        'id' => 'adverts-list',
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'renderFilter' => $renderFilter,
-        'options' => [
-            'class' => !$renderFilter ? 'adverts-list' : 'adverts-list with-filter',
-        ],
-        'itemOptions' => [
-            'class' => 'advert-container',
-        ],
-        'sorter' => [
-            'class' => AdvertListLinkSorter::className(),
-            'attributes' => [
-                'created_at',
-                'updated_at',
-                'min_price',
-            ],
-        ]
-    ]); ?>
-<?php Pjax::end() ?>

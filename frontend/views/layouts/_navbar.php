@@ -58,6 +58,11 @@ use yii\helpers\Url;
                             'url' => ['/adverts/advert/published'], 
                         ],
                         [
+                            'label' => Yii::t('app', 'Настройки'),
+                            'url' => Url::to('/settings'),
+                            'visible' => Yii::$app->user->isSuperadmin,
+                        ],
+                        [
                             'label' => Yii::t('app', 'Администрировать'),
                             'url' => Url::to(BACKEND_URL),
                             'visible' => Yii::$app->user->isSuperadmin,

@@ -36,10 +36,14 @@ use yii\helpers\Html;
         </div>
     <?php endif; ?>
     <div class="row">
-        {items}
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            {items}
+        </div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     </div>
     <div class='clear'></div>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-        {pager}
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+            {pager}
+        </div>
     </div>
 <?= Html::endTag($tag); ?>

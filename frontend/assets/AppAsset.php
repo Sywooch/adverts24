@@ -29,7 +29,6 @@ class AppAsset extends AssetBundle
         'css/src/icons.css',
         'css/src/auth.css',
         'css/src/adverts-list.css',
-        'css/src/adverts-list-filter.css',
         'css/src/advert-form.css',
         'css/src/users.css',
     ];
@@ -38,7 +37,7 @@ class AppAsset extends AssetBundle
      * @inheritdoc
      */
     public $js = [
-        //'js/src/options.js',
+
     ];
 
     /**
