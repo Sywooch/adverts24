@@ -30,12 +30,13 @@ class m170726_164802_create_adverts_tables extends Migration
             'type'                  => 'ENUM("'.implode('","', $types).'", "") DEFAULT NULL',
             'status'                => 'ENUM("'.implode('","', $statuses).'") DEFAULT "'.Advert::STATUS_NEW.'"',
             'is_foreign'            => 'TINYINT(1) DEFAULT 0',
-            'published'             => 'TINYINT(1) DEFAULT 0',
             'expiry_at'             => 'TIMESTAMP NOT NULL',
             'created_at'            => 'TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP',
             'updated_at'            => 'TIMESTAMP NULL DEFAULT NULL',
             'min_price'             => 'DECIMAL(10,2)',
             'max_price'             => 'DECIMAL(10,2)',
+            'vk_id'                 => 'INT(11) DEFAULT NULL',
+            'vk_guid'               => 'VARCHAR(32) DEFAULT NULL',
         ], $this->tableOptions);
         $this->addForeignKey('fk_advert_refs_user', 'advert', 'user_id', 'user', 'id', 'NO ACTION', 'NO ACTION');
         $this->addForeignKey('fk_advert_refs_advert_category', 'advert', 'category_id', 'advert_category', 'id', 'NO ACTION', 'NO ACTION');

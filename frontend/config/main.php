@@ -13,7 +13,10 @@ return [
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'assetManager' => [
-            'bundles' => !YII_DEBUG ? require __DIR__ . "/assets-prod.php"  : require __DIR__ . "/assets-dev.php",
+            'bundles' => !YII_DEBUG ? require __DIR__ . '/assets-prod.php'  : require __DIR__ . '/assets-dev.php',
+        ],
+        'urlManager' => [
+            'rules' => require __DIR__ . '/routes.php',
         ],
     ],
     'modules' => [

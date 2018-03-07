@@ -18,7 +18,9 @@ class AdvertHelper
         if ($model->geography) {
             $content .= "Место: {$model->geography->title}\n";
         }
-        $content .= "Цена: " . self::stringifyPrice($model) . " \n\n";
+        $content .= "Цена: " . Yii::$app->formatter->asCurrencyRange(
+            $model->min_price, $model->max_price, $model->currency->code
+        ) . " \n\n";
         $content .= "{$model->content}\n\n";
         $content .= "Ссылка: {$model->fullUrl}";
         return $content;

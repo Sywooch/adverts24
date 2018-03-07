@@ -96,9 +96,6 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
-
-            ],
         ],
         'view' => [
             'class' => 'common\modules\core\web\View',

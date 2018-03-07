@@ -35,10 +35,14 @@ use yii\helpers\Url;
  * @property string $updated_at
  * @property float $min_price
  * @property float $max_price
+ * @property integer $vk_id
+ * @property string $vk_guid
+ *
  * @property string $cityName
  * @property integer $commentsCount
  * @property string $url
  * @property string $fullUrl
+ *
  * @property Comment[] $comments
  * @property Currency $currency
  * @property integer $dislikesCount
@@ -209,7 +213,7 @@ class Advert extends \common\modules\core\db\ActiveRecord
      */
     public function getUrl($scheme = false)
     {
-        return !$this->isNewRecord ? Url::to(['/adverts/advert/view', 'id' => $this->id], $scheme) : null;
+        return !$this->isNewRecord ? Url::to([FRONTEND_URL . '/adverts/advert/view', 'id' => $this->id], $scheme) : null;
     }
 
     /**
@@ -218,6 +222,14 @@ class Advert extends \common\modules\core\db\ActiveRecord
     public function getFullUrl()
     {
         return $this->getUrl(true);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getPublished()
+    {
+        return $this->vk_id && $this->vk_guid;
     }
 
     /**

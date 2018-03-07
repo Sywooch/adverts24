@@ -172,9 +172,6 @@ jQuery(document).on('click', '[data-action=advert-publish]', function(e) {
                 $('#advert-grid-modal').modal('hide').find('.modal-body').html('');
             }            
         },
-        error: function(jqXHR, textStatus, errorThrown) {
-            alert('Error! See firebug..');          
-        }
     });
     e.preventDefault();
 });

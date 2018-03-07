@@ -16,6 +16,11 @@ return [
         'assetManager' => [
             'bundles' => require __DIR__ . "/assets.php",
         ],
+        'frontendUrlManager' => [
+            'class' => 'yii\web\UrlManager',
+            'baseUrl' => FRONTEND_URL,
+            'rules' => require __DIR__ . '/../../frontend/config/routes.php',
+        ],
     ],
     'modules' => [
         'adverts' => [

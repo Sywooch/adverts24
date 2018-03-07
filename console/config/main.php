@@ -30,6 +30,15 @@ return [
                 ],
             ],
         ],
+        'backendUrlManager' => [
+            'class' => 'yii\web\UrlManager',
+            'baseUrl' => BACKEND_URL,
+        ],
+        'frontendUrlManager' => [
+            'class' => 'yii\web\UrlManager',
+            'baseUrl' => FRONTEND_URL,
+            'rules' => require __DIR__ . '/../../frontend/config/routes.php',
+        ],
     ],
     'params' => $params,
 ];

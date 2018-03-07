@@ -116,7 +116,7 @@ class File extends \common\modules\core\db\ActiveRecord
      */
     public function getPath()
     {
-        return Yii::getAlias('@app/web/uploaded');
+        return Yii::getAlias('@frontend/web/uploaded');
     }
 
     /**
@@ -124,31 +124,8 @@ class File extends \common\modules\core\db\ActiveRecord
      */
     public function getFullName()
     {
-        return Yii::getAlias("@app/web/uploaded/{$this->file_name}");
+        return Yii::getAlias("@frontend/web/uploaded/{$this->file_name}");
     }
-
-    /**
-     * Validates maximum count of related files.
-     * @param string $attribute
-     */
-    /*public function validateFilesLimit($attribute)
-    {
-        $count = self::find()->where([
-            'owner_id' => $this->owner_id,
-            'owner_model_name' => $this->owner_model_name
-        ])->count();
-        $modelName = ActiveRecord::getFullClassName($this->owner_model_name);;
-        switch ($modelName) {
-            case Advert::className():
-                $maxCount = $modelName::getMaxFilesCount();
-        }
-
-        if ($count >= $maxCount) {
-            $this->addError($attribute, Yii::t('app', 'Максимально допустимое количество файлов - {count}', [
-                'count' => $maxCount
-            ]));
-        }
-    }*/
 
     /**
      * Uploads file and attaches it to the model.

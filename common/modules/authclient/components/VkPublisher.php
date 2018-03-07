@@ -27,6 +27,7 @@ class VkPublisher extends Component
             'token' => VKONTAKTE_ACCESS_TOKEN
         ]);
 
+        $attachments = [];
         if ($model->files) {
             $data = $client->post('photos.getWallUploadServer', [
                 'group_id' => VKONTAKTE_GROUP_ID_POSITIVE
@@ -34,40 +35,60 @@ class VkPublisher extends Component
             $uploadUrl = $data['response']['upload_url'];
 
             foreach ($model->files as $file) {
-                $client->post('photos.saveWallPhoto', [
-                    'group_id' => VKONTAKTE_GROUP_ID_POSITIVE,
-                    'photo' => $file
-                ]);
+                $uploadResponse = $this->uploadFiles(['photo' => new \CURLFile($file->fullName)], $uploadUrl);
 
-                $file->save();
+                if (isset($uploadResponse->server) && isset($uploadResponse->hash) && isset($uploadResponse->photo)) {
+                    $saveResponse = $client->post('photos.saveWallPhoto', [
+                        'group_id' => VKONTAKTE_GROUP_ID_POSITIVE,
+                        'server' => $uploadResponse->server,
+                        'hash' => $uploadResponse->hash,
+                        'photo' => $uploadResponse->photo,
+                    ]);
+
+                    if (isset($saveResponse['response']) && count($saveResponse['response'])) {
+                        $attachments[] =  $saveResponse['response'][0]['id'];
+                    }
+                }
             }
         }
 
-        $client->post('wall.post', [
+        $model->vk_guid = YII_DEBUG ? md5($model->id . time()) : $model->id;
+
+        $response = $client->post('wall.post', [
             'owner_id' => VKONTAKTE_GROUP_ID_NEGATIVE,
             'message' => AdvertHelper::getPostContent($model),
             'from_group' => 1,
-            'guid' => $model->id,
+            'guid' => $model->vk_guid,
+            'attachments' => implode(',', $attachments),
         ]);
+
+        if (isset($response['response']) && isset($response['response']['post_id'])) {
+            $model->vk_id = $response['response']['post_id'];
+            $model->save();
+        }
     }
 
     /**
-     * @param File[] $file
+     * @param array $data
      * @param string $uploadUrl
+     * @return array
      */
-    public function uploadFile($files, $uploadUrl)
+    public function uploadFiles($data, $uploadUrl)
     {
         if ($curl = curl_init()) {
-            curl_setopt($curl,CURLOPT_URL,$uploadUrl);
+            curl_setopt($curl, CURLOPT_URL,$uploadUrl);
+            curl_setopt($curl, CURLOPT_POST, true);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
             curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
-            curl_setopt($curl, CURLOPT_POST, true);
-            curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $photos_array);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
-            $photos = curl_exec($curl); // Получаем ответ
-            $photos = json_decode($photos); // Разбираем JSON
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+
+            $response = curl_exec($curl); // Получаем ответ
+            $response = json_decode($response); // Разбираем JSON
             curl_close($curl);
+
+            return $response;
         }
+        return false;
     }
 }

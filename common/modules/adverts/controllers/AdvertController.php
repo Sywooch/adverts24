@@ -117,10 +117,6 @@ class AdvertController extends Controller
         $model = $this->findModel($id, self::MODE_WRITE);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            if (!$model->published && $model->status = Advert::STATUS_ACTIVE) {
-                Yii::$app->get('vkPublisher')->publishAdvert($model);
-            }
-
             if (Yii::$app->request->isAjax) {
                 Yii::$app->response->format = Response::FORMAT_JSON;
                 return [
