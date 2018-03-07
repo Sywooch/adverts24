@@ -25,7 +25,8 @@ jQuery(function ($) {
     $(document).on('pjax:beforeSend', function(data, xhr, options) {
         var targetId = options.target ? options.target.id : null;
         if (targetId == 'filter-form' || targetId == 'search-form') {
-            var params = {}, url = [];
+            var params = {}, url = [], showClearFilterButton = false,
+                clearFilterButtonUi = $('#adverts-list-filter-wrapper .clear-filter');
             $.each(window.location.search.slice(window.location.search.indexOf('?') + 1).split('&'), function(i, field) {
                 var parts = field.split('=');
                 if (parts.length == 2) {
@@ -39,8 +40,11 @@ jQuery(function ($) {
             });
             $.each(params, function(name, value) {
                 url.push(name + '=' + value);
+                showClearFilterButton = ttue;
             });
             options.url = options.url.split('?')[0] + '?' + url.join('&');
+
+            showClearFilterButton ? clearFilterButtonUi.show() : clearFilterButtonUi.hide()
         }
     });
 

@@ -49,12 +49,12 @@ $expandIcons = '<span class="collapsed pull-right"></span><span class="expanded 
         ]); ?>
 
         <!-- phrase -->
-        <?= $form->field($model, 'phrase', [
+        <?php /*$form->field($model, 'phrase', [
             'options' => [
                 'class' => 'form-group mb-0',
             ],
             'template' => '{label}<div class="input-group">{input}<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span></div>'
-        ])->textInput(); ?>
+        ])->textInput();*/ ?>
 
         <!-- type -->
         <?= $form->field($model, 'type', [
@@ -98,36 +98,6 @@ $expandIcons = '<span class="collapsed pull-right"></span><span class="expanded 
             'options' => [
 
             ]
-        ]); ?>
-
-        <!-- min_price, max_price -->
-        <?= $form->field($model, 'min_price', [
-            'options' => [
-                'class' => 'form-group',
-            ],
-        ])->textInput([
-            'placeholder' => Yii::t('app', 'от')
-        ]); ?>
-
-        <?= $form->field($model, 'max_price', [
-            'template' => '{input}',
-            'options' => [
-                'class' => 'form-group'
-            ],
-        ])->textInput([
-            'placeholder' => Yii::t('app', 'до')
-        ]); ?>
-
-        <?= $form->field($model, 'currency_id', [
-            'options' => [
-                'class' => 'form-group',
-                'style' => !$model->min_price && !$model->max_price ? ' display: none' : ''
-            ]
-        ])->widget(ButtonGroupSelectable::className(), [
-            'id' => 'button-group-currency',
-            'model' => $model,
-            'attribute' => 'type',
-            'items' => ArrayHelper::map(CurrencySearch::getList(), 'id', 'short_name'),
         ]); ?>
 
         <!-- category_id -->
@@ -187,8 +157,38 @@ $expandIcons = '<span class="collapsed pull-right"></span><span class="expanded 
             ],
         ]); ?>
 
-        <?php Html::a('Сбросить фильтр', Url::home(), [
-            'class' => 'btn btn-secondary btn-sm col-12'
+        <!-- min_price, max_price -->
+        <?= $form->field($model, 'min_price', [
+            'options' => [
+                'class' => 'form-group',
+            ],
+        ])->textInput([
+            'placeholder' => Yii::t('app', 'от')
+        ]); ?>
+
+        <?= $form->field($model, 'max_price', [
+            'template' => '{input}',
+            'options' => [
+                'class' => 'form-group'
+            ],
+        ])->textInput([
+            'placeholder' => Yii::t('app', 'до')
+        ]); ?>
+
+        <?= $form->field($model, 'currency_id', [
+            'options' => [
+                'class' => 'form-group',
+                'style' => !$model->min_price && !$model->max_price ? ' display: none' : ''
+            ]
+        ])->widget(ButtonGroupSelectable::className(), [
+            'id' => 'button-group-currency',
+            'model' => $model,
+            'attribute' => 'type',
+            'items' => ArrayHelper::map(CurrencySearch::getList(), 'id', 'short_name'),
+        ]); ?>
+
+        <?= Html::a('Сбросить фильтр', Url::home(), [
+            'class' => 'btn btn-secondary btn-sm clear-filter'
         ]); ?>
 
         <?php ActiveForm::end(); ?>

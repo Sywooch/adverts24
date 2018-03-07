@@ -216,10 +216,3 @@ AdvertFormAsset::register($this);
     <div class="clear"></div>
 
 <?php ActiveForm::end(); ?>
-
-<?php
-if (!Yii::$app->request->isAjax) {
-    $saveTempletUrl = Url::to('/adverts/advert/save-templet');
-    $this->registerJs($js, View::POS_READY);
-}
-?>
